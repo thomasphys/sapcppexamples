@@ -1,0 +1,5 @@
+Build:
+make
+
+Run:
+./helloworld <input values, whatever you want>
