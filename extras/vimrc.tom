@@ -1,0 +1,213 @@
+
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+Plugin 'dense-analysis/ale'
+Plugin 'tomasiser/vim-code-dark'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mattn/emmet-vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'junegunn/vader.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'Raimondi/delimitMate'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'cjrh/vim-conda'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+" " 
+" Vim settings for @mscoutermarsh
+"
+
+" Settings in this file may depend on plugins, so let's install them first.
+" Not to be confused with the contents of ~/.vim/plugin/* which are
+" configuration options for each plugin and automatically loaded by Vim.
+source ~/.vim/plugin/plugins.vim
+
+" Leader Mappings
+map <Space> <leader>
+map <Leader>w :update<CR>
+map <Leader>q :qall<CR>
+map <Leader>gs :Gstatus<CR>
+
+syntax on
+
+set autoread                          " Auto reload changed files
+set wildmenu                          " Tab autocomplete in command mode
+set backspace=indent,eol,start        " http://vi.stackexchange.com/a/2163
+set clipboard=unnamed                 " Clipboard support (OSX)
+set laststatus=2                      " Show status line on startup
+set splitright                        " Open new splits to the right
+set splitbelow                        " Open new splits to the bottom
+set lazyredraw                        " Reduce the redraw frequency
+set ttyfast                           " Send more characters in fast terminals
+set textwidth=80                      " Auto wrap as typing at 80 columns 
+set colorcolumn=80                    " Highlight column at 80 
+set nowrap                            " Don't wrap long lines
+set listchars=extends:→               " Show arrow if line continues rightwards
+set listchars+=precedes:←             " Show arrow if line continues leftwards
+set nobackup nowritebackup noswapfile " Turn off backup files
+set noerrorbells novisualbell         " Turn off visual and audible bells
+set expandtab shiftwidth=2 tabstop=2  " Two spaces for tabs everywhere
+set history=500
+set hlsearch                          " Highlight search results
+set ignorecase smartcase              " Search queries intelligently set case
+set incsearch                         " Show search results as you type
+set timeoutlen=1000 ttimeoutlen=0     " Remove timeout when hitting escape
+set showcmd                           " Show size of visual selection
+
+" Folding opts
+" set foldmethod=indent
+" set foldlevel=1
+" set foldclose=all
+
+" Persistent undo
+set undodir=~/.vim/undo/
+set undofile
+set undolevels=1000
+set undoreload=10000
+
+" Ignored files/directories from autocomplete (and CtrlP)
+set wildignore+=*/tmp/*
+set wildignore+=*.so
+set wildignore+=*.zip
+set wildignore+=*/vendor/bundle/*
+set wildignore+=*/node_modules/
+
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|node_modules)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+"-------------------------------------------------------------------------------
+" Interface
+"-------------------------------------------------------------------------------
+
+set number            " Enable line numbers
+set scrolloff=5       " Leave 5 lines of buffer when scrolling
+set sidescrolloff=10  " Leave 10 characters of horizontal buffer when scrolling
+
+"-------------------------------------------------------------------------------
+" Colors & Formatting
+"-------------------------------------------------------------------------------
+
+colorscheme desert
+set background=dark
+hi Search cterm=bold ctermfg=grey ctermbg=blue
+highlight ColorColumn ctermbg=grey
+
+" Showcase comments in italics
+highlight Comment cterm=italic gui=italic
+
+" spell check
+set spelllang=en
+set spellfile=$HOME/Dropbox/vim/spell/en.utf-8.add
+set spell
+hi clear SpellBad
+hi SpellBad cterm=underline
+" autocmd FileType typescript setlocal nospell 
+
+" add spell checking and automatic wrapping to commit messages
+autocmd Filetype gitcommit setlocal spell textwidth=72
+
+" lightline
+set laststatus=2
+if !has('gui_running')
+  set t_Co=256
+endif
+
+" fzf
+set rtp+=/usr/local/opt/fzf
+
+" YouCompleteMe
+let g:ycm_min_num_of_chars_for_completion = 2
+
+" Get off my lawn - helpful when learning Vim :)
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+" CtrlP mappings
+" set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" NERDtree
+" autocmd vimenter * NERDTree
+let g:NERDTreeShowHidden=1
+nnoremap <C-e> :NERDTreeToggle<CR>
+
+" ale
+let g:ale_set_highlights = 0
+let g:ale_completion_enabled = 1
+let g:ale_linters_explicit = 1
+let g:ale_fix_on_save = 1
+
+" hex mode
+nnoremap <C-H> :Hexmode<CR>
+inoremap <C-H> <Esc>:Hexmode<CR>
+vnoremap <C-H> :<C-U>Hexmode<CR>
+
+"-------------------------------------------------------------------------------
+" Nevim-specific configurations
+"-------------------------------------------------------------------------------
+
+if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  set termguicolors
+  set background=dark
+
+  " Fix vim-tmux-navigator <C-h> https://git.io/viGRU
+  nmap <BS> <C-W>h
+
+  " Fix vim-tmux-navigator <C-h> https://git.io/vS5QH
+  nmap <BS> :<C-u>TmuxNavigateLeft<CR>
+
+endif
