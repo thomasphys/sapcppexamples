@@ -1,2 +1,2 @@
 helloworld: helloworld.cpp
-	gcc -o $@ $^
+	g++ -o $@ $^
