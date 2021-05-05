@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include "hellofunction.h"
 
+//main function with inputs. 
 int main(int argc, char** argv){
 
 	printf("Yup, another hello world....\n");
@@ -11,15 +12,17 @@ int main(int argc, char** argv){
 		printf("	%s\n",argv[i]);
 	}
 
-	//convert to integers
+	//Need 3 numbers
 	if(argc < 4){
 		printf("not enough input parameters for next demonstration\n");
 		return 0;
 	}
+	//read as integers and put in variables. 
 	int value1 = std::atoi(argv[1]);
 	int value2 = std::atoi(argv[2]);
 	int* value3 = new int(std::atoi(argv[3]));
 
+	//call our hellofunction. 
 	int value1returned = hellofunction(value1,value2,value3);
 
 	printf("After hellofunction, value 1 is %d\n",value1);

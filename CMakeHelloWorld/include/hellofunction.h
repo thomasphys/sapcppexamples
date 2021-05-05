@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 
+//function that takes in real value, reference and pointer.
 int hellofunction(int value1, int &value2, int *value3){
 	
 	printf("input value 1 is %d, now setting it to %d\n",value1,value1+5);

@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+//main function with inputs.
 int main(int argc, char** argv){
 
 	printf("Yup, another hello world....\n");
